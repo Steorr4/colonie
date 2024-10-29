@@ -37,4 +37,13 @@ public class Ressource {
     public void setProprietaire(Crewmate proprietaire) {
         this.proprietaire = proprietaire;
     }
+
+    //toString
+
+    @Override
+    public String toString() {
+        return "Ressource{" +
+                "numero=" + numero +
+                '}';
+    }
 }

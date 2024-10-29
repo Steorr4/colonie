@@ -40,4 +40,13 @@ public class Crewmate {
     public void setRelations(List<Crewmate> relations) {
         this.relations = relations;
     }
+
+    //toString
+
+    @Override
+    public String toString() {
+        return "Crewmate{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }
