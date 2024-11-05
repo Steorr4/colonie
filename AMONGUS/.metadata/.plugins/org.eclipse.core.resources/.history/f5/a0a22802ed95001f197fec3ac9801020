@@ -1,0 +1,44 @@
+package v1;
+
+import java.util.Scanner;
+import java.util.Vector;
+
+public class TestColonie {
+	public static void main(String[] args) {
+		
+		System.out.println("Bonjour ! bienvenue à bord du vaisseau \n");
+		System.out.println("Combien de colons voulez-vous ?");
+		int n;
+		Scanner sc=new Scanner(System.in);
+		do {
+			
+			n=sc.nextInt();
+			
+		}while(n<0 || n>26);
+		
+		Colonie colonie=new Colonie(n);
+		
+		
+		
+		colonie.ajoutRelation("A", "B");
+		colonie.affectationAuto();
+		colonie.calculNbJaloux();
+		System.out.println(colonie.getNbJaloux());
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+		
+	
+	
+	
+	}
+}

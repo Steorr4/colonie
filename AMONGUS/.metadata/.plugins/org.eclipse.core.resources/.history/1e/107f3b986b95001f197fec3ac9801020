@@ -1,0 +1,32 @@
+package v1;
+
+import java.util.Scanner;
+
+public class TestColonie {
+	public static void main(String[] args) {
+		System.out.println("Bonjour ! bienvenue à bord du vaisseau \n");
+		System.out.println("Combien de colons voulez-vous ?");
+		int n;
+		Scanner sc=new Scanner(System.in);
+		do {
+			
+			n=sc.nextInt();
+			
+		}while(n<0 || n>26);
+		
+		Colonie colonie=new Colonie(n);
+		do {
+			System.out.println("1 : pour ajouter une relation entre deux colons \n");
+			System.out.println("2 : pour ajouter les prefenrences d'un colon \n");
+			System.out.println("3 : pour finir ! \n");
+			int choix=sc.nextInt();
+			switch(choix) {
+				case 1: System.out.println("entrez les id des deux colons");
+						ajoutRelation(sc.next(),sc.next());
+						break;
+			}
+	
+	
+	
+	}
+}
