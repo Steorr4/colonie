@@ -5,11 +5,15 @@ import java.util.List;
 
 public class Crewmate {
     private String name;
+    private boolean isEnvious;
+    private Ressource rAssigned;
     private List<Ressource> preferences;
     private List<Crewmate> relations;
 
     public Crewmate(String name){
         this.name = name;
+        isEnvious = false;
+        rAssigned = null;
         preferences = new ArrayList<>();
         relations = new ArrayList<>();
     }
@@ -23,6 +27,22 @@ public class Crewmate {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isEnvious() {
+        return isEnvious;
+    }
+
+    public void setEnvious(boolean envious) {
+        isEnvious = envious;
+    }
+
+    public Ressource getrAssigned() {
+        return rAssigned;
+    }
+
+    public void setrAssigned(Ressource rAssigned) {
+        this.rAssigned = rAssigned;
     }
 
     public List<Ressource> getPreferences() {

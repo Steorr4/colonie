@@ -14,11 +14,94 @@ public class Colonie {
         this.ressourceList = ressourceList;
     }
 
+    public void affectationAuto() throws Exception{
+        for (Crewmate c : crewmateList) {
+            if(c.getPreferences().isEmpty()) throw new Exception("Liste de preference du colon "+
+                    c.getName()+" vide");
+            for(Ressource r : c.getPreferences()){
+                if(r.isAvailable()) {
+                    c.setrAssigned(r);
+                    r.setProprietaire(c);
+                    r.setAvailable(false);
+                    break;
+                }
+                else{
+                    for(Crewmate impostor : c.getRelations()){
+                        if (r.getProprietaire().equals(impostor)){
+                            c.setEnvious(true);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void swapRessources(Crewmate c1, Crewmate c2){
+        Ressource r1 = c1.getrAssigned();
+        Ressource r2 = c2.getrAssigned();
+        r1.setProprietaire(c2);
+        c2.setrAssigned(r1);
+        r2.setProprietaire(c1);
+        c1.setrAssigned(r2);
+    }
+
+    public int nbEnvious(){
+        int cpt = 0;
+        for(Crewmate c : crewmateList){
+            if(c.isEnvious()) cpt++;
+        }
+        return cpt;
+    }
+
+    public void menu(Scanner sc) throws Exception{
+        int choix;
+        boolean exit = false;
+        StringTokenizer st;
+        String line = null;
+        String colon1_name = null;
+        String colon2_name = null;
+        Crewmate c1 = null;
+        Crewmate c2 = null;
+
+        while(!exit) {
+            do {
+                System.out.println("********************");
+                System.out.println("Que souhaitez vous faire ?");
+                System.out.println("1. Echanger les ressources entre 2 colons");
+                System.out.println("2. Afficher le nombre de jaloux");
+                System.out.println("0. Quitter la colonie.");
+                System.out.println("********************");
+                choix = sc.nextInt();
+                sc.nextLine();
+            } while(choix < 0 || choix > 2);
+
+            switch(choix) {
+                case 1:
+                    System.out.println("Entrez les deux colons dont vous voulez echanger les ressources. (ex: 'A B')");
+                        line = sc.nextLine();
+                        st = new StringTokenizer(line," ");
+                        if (st.countTokens() != 2) throw new IndexOutOfBoundsException("!= 2");
+                        colon1_name = st.nextToken();
+                        colon2_name = st.nextToken();
+                        for (Crewmate colon : crewmateList){
+                            if(colon.getName().equals(colon1_name)) c1 = colon;
+                            if(colon.getName().equals(colon2_name)) c2 = colon;
+                        }
+                        if(c1 == null || c2 == null) throw new Exception("Colon Innexistant");
+                        swapRessources(c1,c2);
+                    break;
+                case 2:
+                    System.out.println(nbEnvious());
+                    break;
+                default:
+                    exit = true;
+            }
+        }
+    }
 
     public static class ColonieSetup{
-        public static Colonie setUp() throws Exception{
+        public static Colonie setUp(Scanner sc) throws Exception{
 
-            Scanner sc = new Scanner(System.in);
             int n = 0;
             System.out.println("Combien voulez vous de colons ? (1 - 26)");
             n = sc.nextInt();
@@ -92,7 +175,6 @@ public class Colonie {
                         break;
 
                     default:
-                        sc.close();
                         fin = true;
                 }
             }
