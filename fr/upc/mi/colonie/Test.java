@@ -19,9 +19,8 @@ public class Test {
                 if (listPreferences != null) System.out.println(listPreferences);
             }
             c.menu(sc);
-
         }catch (Exception e){
-            e.getMessage();
+            e.printStackTrace();
         }finally {
             sc.close();
         }
