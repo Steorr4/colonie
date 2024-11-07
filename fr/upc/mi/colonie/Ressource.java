@@ -7,7 +7,7 @@ public class Ressource {
 
     public Ressource(int numero){
         this.numero = numero;
-        isAvailable = false;
+        isAvailable = true;
         proprietaire = null;
     }
 

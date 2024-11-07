@@ -17,9 +17,8 @@ public class Test {
                 listPreferences = crewmate.getPreferences();
                 if (listRelation != null) System.out.println(listRelation);
                 if (listPreferences != null) System.out.println(listPreferences);
-                c.menu(sc);
             }
-
+            c.menu(sc);
 
         }catch (Exception e){
             e.getMessage();
