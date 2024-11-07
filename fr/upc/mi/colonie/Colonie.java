@@ -54,6 +54,7 @@ public class Colonie {
     }
 
     public void menu(Scanner sc) throws Exception{
+
         int choix;
         boolean exit = false;
         StringTokenizer st;
@@ -62,6 +63,8 @@ public class Colonie {
         String colon2_name = null;
         Crewmate c1 = null;
         Crewmate c2 = null;
+
+        this.affectationAuto();
 
         while(!exit) {
             do {
