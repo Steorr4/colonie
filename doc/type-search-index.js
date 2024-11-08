@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"fr.upc.mi.colonie","l":"Colonie"},{"p":"fr.upc.mi.colonie","l":"Colonie.ColonieSetup"},{"p":"fr.upc.mi.colonie","l":"Crewmate"},{"p":"fr.upc.mi.colonie","l":"Ressource"},{"p":"fr.upc.mi.colonie","l":"Test"}]

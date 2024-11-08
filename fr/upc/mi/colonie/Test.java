@@ -3,6 +3,9 @@ package fr.upc.mi.colonie;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Test manuel du programme
+ */
 public class Test {
     public static void main(String[]args){
         List<Crewmate> listRelation;
