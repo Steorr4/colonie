@@ -41,11 +41,24 @@ public class Colonie {
                     r.setAvailable(false);
                     break;
                 }
-                else{
-                    for(Crewmate impostor : c.getRelations()){
-                        if (r.getProprietaire().equals(impostor)){
-                            c.setEnvious(true);
-                        }
+            }
+        }
+        setEnviousList();
+    }
+
+    private void setEnviousList(){
+        for(Crewmate c : crewmateList){
+            c.setEnvious(false);
+        }
+        for(Crewmate c : crewmateList){
+            for(Ressource r : c.getPreferences()) {
+                if(r.equals(c.getrAssigned())){
+                    break;
+                }
+                for (Crewmate mechant : c.getRelations()) {
+                    if (mechant.getrAssigned() == r){
+                        c.setEnvious(true);
+                        break;
                     }
                 }
             }
@@ -65,6 +78,7 @@ public class Colonie {
         c2.setrAssigned(r1);
         r2.setProprietaire(c1);
         c1.setrAssigned(r2);
+        setEnviousList();
     }
 
     /**
