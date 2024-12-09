@@ -149,6 +149,13 @@ public class Colonie {
         /**
          * Lance l'initialisation de la colonie.
          *///TODO
+        public static Crewmate getCrewmate(String nom,List<Crewmate> crewmateList){
+            for(Crewmate c:crewmateList){
+                if(c.getName().equals(nom)) return c;
+            }
+        return null;
+        }
+
         public static Colonie setUp(String path) throws Exception {
             try {
                 List<Crewmate> crewmateList = new ArrayList<>();
@@ -156,30 +163,49 @@ public class Colonie {
                 BufferedReader br = new BufferedReader(new FileReader(path));
                 boolean verifValide = verifFichier(path);
                 String ligne=null;
-
+                String separateur = new String("(),.");
 
                 if(verifValide){
                     while ((ligne = br.readLine()) != null) {
-                        if (ligne.startsWith("colon(")){
+                        String[] l=ligne.split(separateur);
+                        if (ligne.startsWith("colon")){
+                            crewmateList.add(new Crewmate(l[1]));
+                        }
+                        if(ligne.startsWith("ressource")) {
+                            for (int i = 1; i < crewmateList.size(); i++) {
+                                ressourceList.add(new Ressource(l[i]));
+                            }
+                        }
+                        if(ligne.startsWith("deteste")) {
+                            Crewmate c1 = getCrewmate(l[1], crewmateList);
+                            Crewmate c2 = getCrewmate(l[2], crewmateList);
+                            c1.addRelation(c2);
+                            c2.addRelation(c1);
+                        }
+                        if(ligne.startsWith("preferences")) {
+                            Crewmate c = getCrewmate(l[1], crewmateList);
 
-
-
+                            for (int i = 2; i < crewmateList.size(); i++) {
+                                c.getPreferences().add(new Ressource(l[i]));
+                            }
                         }
 
-
-
-
                     }
+                    br.close();
 
-
-
+                    return new Colonie(crewmateList, ressourceList);
                 }
-
+                
+                else throw new Exception("fichier de format invalide");
 
             } catch (Exception e) {
-
+                System.err.println("Erreur: "+e.getMessage());
             }
         }
+
+
+
+
 
         public static boolean verifFichier (String path){
                 try {
@@ -272,9 +298,7 @@ public class Colonie {
                             } else {
                                 throw new Exception("pas ordonné");
                             }
-
                         }
-
                     }
                     if (nbColon != nbPreferences) throw new Exception("preferences pas attribuées a tout les colons");
                 } catch (Exception e) {
@@ -283,6 +307,7 @@ public class Colonie {
                 return true;
             }
         }
+
     }
 
 

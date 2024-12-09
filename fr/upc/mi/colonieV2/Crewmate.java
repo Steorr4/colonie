@@ -26,7 +26,9 @@ public class Crewmate {
         relations = new ArrayList<>();
     }
 
-
+    public void addRelation(Crewmate c){
+        relations.add(c);
+    }
     //Getters & Setters
 
     /**
