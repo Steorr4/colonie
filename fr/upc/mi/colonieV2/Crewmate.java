@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Represente un colon ainsi que les informations le concernant
  */
-public class Crewmate {
+public class Crewmate implements Comparable<Crewmate>{
     private String name;
     private boolean isEnvious;
     private Ressource rAssigned;
@@ -109,5 +109,10 @@ public class Crewmate {
         return "Crewmate{" +
                 "name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Crewmate o){
+        return Integer.compare(o.getRelations().size(),this.getRelations().size() );
     }
 }

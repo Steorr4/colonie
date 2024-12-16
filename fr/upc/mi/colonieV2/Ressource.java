@@ -54,7 +54,7 @@ public class Ressource {
     @Override
     public String toString() {
         return "Ressource{" +
-                "rscName=" + rscName +
+                "rscName=" + ressource +
                 '}';
     }
 }

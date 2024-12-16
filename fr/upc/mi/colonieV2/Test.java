@@ -8,8 +8,24 @@ import java.util.Scanner;
  */
 public class Test {
     public static void main(String[]args){
-        List<Crewmate> listRelation;
-        List<Ressource> listPreferences;
-        Scanner sc = new Scanner(System.in);
+        try {
+        System.out.println("fichir  valide " + ColonieSetup.verifFichier("./fr/upc/mi/colonieV2/colonie.txt"));
+
+        ColonieSetup colonieSetup= new ColonieSetup();
+        Colonie colonie = colonieSetup.setUp("./fr/upc/mi/colonieV2/colonie.txt");
+        System.out.println("colonie "+ colonie);
+        System.out.println("nbJaloux "+ colonie.nbEnvious());
+
+
+
+
+
+
+
+
+
+        }catch(Exception e){
+            System.err.println("probleme" +e.getMessage());
+        }
     }
 }
