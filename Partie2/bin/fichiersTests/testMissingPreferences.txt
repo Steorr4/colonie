@@ -1,0 +1,4 @@
+colon(nina).
+colon(nicholas).
+ressource(food).
+preferences(nina,food).  
