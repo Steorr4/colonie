@@ -5,16 +5,15 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Simule le partage de ressources dans une colonie en fonction des relations
  * des colons et de leurs affinites.
  */
 public class Colonie  {
-    private List<Crewmate> crewmateList;
+    private List<Crewmate> crewmateList; //List car on ne connait pas le nombre de colons intial et la manipulation des List (ajout
     private List<Ressource> ressourceList;
-
+    private AffectationStrategy affectationStrategy;
     /**
      * Constructeur de la colonie.
      *
@@ -25,7 +24,12 @@ public class Colonie  {
         this.crewmateList = crewmateList;
         this.ressourceList = ressourceList;
     }
-
+    
+    /**
+     * methode d'effectation naive qui affecte a chaqu'un des colons de 
+     * crewmateList dans l'ordre la ressource qu'il prefere si disponible sinon la prochaine.
+     *
+     */
 
      public void affectationAuto() throws Exception{
     	 for (Crewmate cr : crewmateList) {
@@ -46,7 +50,14 @@ public class Colonie  {
         setEnviousList();
     }
     
-     
+     /**
+      * methode d'effectation naive qui affecte a chaqu'un des colons de 
+      * crewmateList dans l'ordre la ressource qu'il prefere si disponible sinon la prochaine.
+      * utile pour la methode algoAffectationOptimisee
+      * 
+      * @param crewmateList une liste de crewmates
+      *
+      */
     public void algoAffectation(List<Crewmate>crewmateList) {
     	 for (Crewmate cr : crewmateList) {
     		 cr.setrAssigned(null);
@@ -76,7 +87,21 @@ public class Colonie  {
         }
        
     }
+   // / Méthode pour définir la stratégie à utiliser
+    public void setAffectationStrategy(AffectationStrategy affectationStrategy) {
+        this.affectationStrategy = affectationStrategy;
+    }
+
+    // Méthode pour appliquer la stratégie d'affectation
+    public void appliquerAffectation() throws Exception {
+        this.affectationStrategy.affecterRessources(this);
+    }
     
+    /**
+     * Algorithme d'affectation de complexité O(n2) efficace pour un tres grand nombre de colons (100) mais pas pour un nombre petit.
+     *
+     * @param maxIterations le nombre d'iterations maximales.
+     */
     
     public void algoAffectationOptimise(int maxIterations) {
         // Étape 1 : Initialisation
@@ -123,7 +148,10 @@ public class Colonie  {
     }
 
     	
-    
+    /**
+     * Algorithme du prof amélioré avec tri de la liste de crewmate 
+     *
+     */
     public void algoAmeliore() throws Exception {
     	Collections.sort(crewmateList);//trie la liste selon le "degre" d'ennemies afin de reduire des le depart le nombre de jaloux
     	affectationAuto();
@@ -160,7 +188,10 @@ public class Colonie  {
     	
     }
     
-    public void algoAmeliore2() throws Exception {
+    /**
+     * algorithme inspire de algoAmeliore 
+     */
+   /* public void algoAmeliore2() throws Exception {
     	
        Collections.sort(crewmateList);//trie la liste selon le "degre" d'ennemies afin de reduire des le depart le nombre de jaloux
         affectationAuto();
@@ -170,7 +201,7 @@ public class Colonie  {
         int meilleurNbJaloux = nbEnvious();
         int nbIterationsSansAmelioration=0;
         List<Crewmate> envieux;
-        for (int iteration = 0; iteration < 1000; iteration++) {
+        for (int iteration = 0; iteration < 10000; iteration++) {
             envieux = crewmateList.stream().filter(Crewmate::isEnvious).collect(Collectors.toList());
             if (envieux.isEmpty()) break;
 
@@ -180,7 +211,7 @@ public class Colonie  {
             do {
                 voisin = crewmateList.get(generateRandomNumber(crewmateList.size()));
             } while (voisin == pirate);
-
+ 
             swapRessources(pirate, voisin);
 
             int nbJalouxCourant = nbEnvious();
@@ -190,8 +221,8 @@ public class Colonie  {
                 sauvegarderAffectation(meilleureAffectation);
           
             } 
-            //si aucune amelioration au bout de 500 on remelange la liste
-            else if(nbIterationsSansAmelioration>100) {
+            //si aucune amelioration au bout de 100 on remelange la liste
+            else if(nbIterationsSansAmelioration>150) {
             	System.out.println("shuffle");
             	Collections.shuffle(crewmateList);
             	affectationAuto();
@@ -211,10 +242,15 @@ public class Colonie  {
         System.out.println("Meilleure affectation trouvée avec " + meilleurNbJaloux + " jaloux.");
         printAffectations();
         printEnviousCrewmates();
-    }
+    }*/
+    
 
 
-    //genere un nombre random entre 0 et n  exclu
+    /**
+     * genere un nombre random entre 0 et n  exclu.
+     * 
+     * @param n la borne superieure exclu.
+     */
 
     public static int generateRandomNumber(int n)
     {
@@ -225,14 +261,25 @@ public class Colonie  {
         return new Random().nextInt(n);
     }
     
-    
-    private void sauvegarderAffectation(HashMap<String,String> solution) {
+    /**
+     * sauvegarde la solution actuelle 
+     * 
+     * @param solution une hashmap qui contient le nom du colon et la ressource qu'on lui a affecte dans la solution.
+     */
+    public void sauvegarderAffectation(HashMap<String,String> solution) {
     	solution.clear();
         for (Crewmate c : crewmateList) {
             solution.put(c.getName(), c.getrAssigned().getRessource());
         }
     }
-    private void restaurerAffectation(HashMap<String,String> solution) {
+    
+    
+    /**
+     * restaure la liste crewmateList avec la solution.
+     * 
+     * @param solution une hashmap qui contient le nom du colon et la ressource qu'on lui a affecte dans la solution.
+     */
+    public void restaurerAffectation(HashMap<String,String> solution) {
     	for(Crewmate crewmate:crewmateList) {
     		Ressource r= Colonie.getRessource(solution.get(crewmate.getName()),ressourceList);
     		crewmate.setrAssigned(r);
@@ -240,8 +287,10 @@ public class Colonie  {
     	setEnviousList();
     }
    
-
-    private void printAffectations() {
+    /**
+     * affiche les affectations des ressources dans la colonie.
+     */
+    public void printAffectations() {
         for (Crewmate c : crewmateList) {
             System.out.println(c.getName() + " -> " +
                     (c.getrAssigned() != null ? c.getrAssigned().getRessource() : "Aucune ressource"));
@@ -249,8 +298,11 @@ public class Colonie  {
     }
 
 
+    /**
+     * met a jour les etats des colons s'ils sont jaloux ou pas
+     */
     
-    public void setEnviousList(){
+    public void setEnviousList(){ 
         for(Crewmate c : crewmateList){
             c.setEnvious(false);
         }
@@ -269,7 +321,9 @@ public class Colonie  {
         }
     }
     
-    
+    /**
+     * affiche les colons jaloux.
+     */
     public void printEnviousCrewmates() {
         for (Crewmate c : crewmateList) {
             if (c.isEnvious()) {
@@ -283,7 +337,7 @@ public class Colonie  {
      * @param c1 le premier colon
      * @param c2 le deuxieme colon
      */
-    private void swapRessources(Crewmate c1, Crewmate c2){
+    public void swapRessources(Crewmate c1, Crewmate c2){
         Ressource r1 = c1.getrAssigned();
         Ressource r2 = c2.getrAssigned();
 
@@ -330,6 +384,10 @@ public class Colonie  {
          c1.getRelations().add(c2);
          c2.getRelations().add(c1);
      }
+     
+     /**
+      * enumeration des etats pour la verif de fichier.
+      */
 
      public enum State{
          COLON,
@@ -339,6 +397,13 @@ public class Colonie  {
      }
      
      
+     /**
+      * verifie le fichier entré en second argument par l'utilisateur.
+      * @param path le chemin du fichier
+      * @return true si le fichier de format valide 
+      * @throws IOException
+      * @throws Exception
+      */
      
      private boolean verifSauvegarde(String path)throws IOException, Exception{
     	 boolean verif=false;
@@ -375,7 +440,12 @@ public class Colonie  {
      }
      
      
-     
+     /**
+      * Affectation des ressources selon le fichier sauvegarde de l'utilisateur
+      * @param path le chemin du fichier de sauvegarde
+      * @throws IOException
+      * @throws Exception
+      */
      public void setRAsigned(String path) throws IOException, Exception {
     	 try {
   			BufferedReader br = new BufferedReader(new FileReader(path));
@@ -393,7 +463,12 @@ public class Colonie  {
     	 
      }
      
-     
+     /**
+      * recupere la ressource qui a le meme nom que nom
+      * @param nom nom de la ressource rechecrhchée 
+      * @param ressourceListla ressource si presente sinon null
+      * @return la ressource si presente sinon null
+      */
      public static Ressource getRessource(String nom, List<Ressource> ressourceList){
          for(Ressource r:ressourceList){
              if(r.getRessource().equals(nom)) return r;
@@ -403,13 +478,21 @@ public class Colonie  {
      
      
      
-     
+     /**
+      * recupere le colon qui a le meme nom que nom
+      * @param nom nom du colon rechecrhche. 
+      * @param crewmateList la ressource si presente sinon null
+      * @returnla colon si presente sinon null
+      */
      public static Crewmate getCrewmate(String nom, List<Crewmate> crewmateList){
          for(Crewmate c:crewmateList){
              if(c.getName().equals(nom)) return c;
          }
      return null;
      }
+     
+     
+     
      //////MENU PARTIE 1
     /**
      * Le menu de la colonie permettant de decider si l'on veut echanger
@@ -472,16 +555,6 @@ public class Colonie  {
 
 	
 }
-
-
-    
-
-
-
-
-
-
-
 
 
 
