@@ -37,7 +37,7 @@ public class ColonieSetupTest {
 	        
 	 }
 	 
-   // @Test
+    @Test
     public void testSetUp_InvalidColonLineFormat() {
         assertFalse(ColonieSetup.verifFichier(path+"testInvalidColonLineFormat.txt"));
         ColonieSetup cs=new ColonieSetup();
@@ -48,7 +48,7 @@ public class ColonieSetupTest {
 		}
     }
 
-   // @Test
+    @Test
     public void testSetUp_InvalidRessourceLineFormat() {
     	 assertFalse(ColonieSetup.verifFichier(path+"testInvalidRessourceLineFormat.txt"));
     	 ColonieSetup cs=new ColonieSetup();
