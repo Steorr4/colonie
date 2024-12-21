@@ -33,7 +33,6 @@ public class Main {
                 sc = new Scanner(System.in);
 
                 while (!exit) {
-                    choix = -1; // Initialisation invalide
                     do {
                         afficherMenu();
                         try {

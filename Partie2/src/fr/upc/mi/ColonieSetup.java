@@ -11,7 +11,7 @@ import java.util.StringTokenizer;
 public class ColonieSetup {
    
 	/**
-	 * initialise la colonie selon la configuration du fichier de l'utilisateur
+	 * Initialise la colonie selon la configuration du fichier de l'utilisateur
 	 * @param path
 	 * @return la colonie correspondante a la configuration du fichier de l'utilisateur si aucune erreur de survient 
 	 * @throws Exception
@@ -23,7 +23,7 @@ public class ColonieSetup {
                 List<Ressource> ressourceList = new ArrayList<>();
                 BufferedReader br = new BufferedReader(new FileReader(path));
                 boolean verifValide = verifFichier(path);
-                String ligne=null;
+                String ligne;
                 String separateur = "[(),.]";
 
                 if(verifValide){
@@ -88,7 +88,7 @@ public class ColonieSetup {
             List<String> nomColon = new ArrayList<>();
             List<String> nomRessources = new ArrayList<>();
             BufferedReader br = new BufferedReader(new FileReader(path));
-            String ligne = null;
+            String ligne;
             int nbColon = 0;
             int nbRessource = 0;
             int nbPreferences = 0;
@@ -129,10 +129,12 @@ public class ColonieSetup {
                         actualState = Colonie.State.PREFERENCES;
                     }
                     
-                    nbPreferences=verifPreferences(split,numeroLigne,nbRessource,nbColon,nbPreferences,actualState,nomColon,nomRessources);
+                    nbPreferences=verifPreferences(split,numeroLigne,nbRessource,nbColon,
+                            nbPreferences,actualState,nomColon,nomRessources);
                 }
                 else {
-                	throw new Exception("erreur a la ligne "+numeroLigne+ " chaque ligne doit commencer par colon/ressource/deteste/preferences");
+                	throw new Exception("erreur a la ligne "+numeroLigne+
+                            " chaque ligne doit commencer par colon/ressource/deteste/preferences");
                 }
             }
 
@@ -157,7 +159,8 @@ public class ColonieSetup {
      * @throws Exception
      */
     
-    public static int verifColon(String[] split,int numeroLigne,int nbColon,Colonie.State actualState,List<String> nomColon) throws Exception {
+    public static int verifColon(String[] split,int numeroLigne,int nbColon,
+                                 Colonie.State actualState,List<String> nomColon) throws Exception {
     	if (actualState != Colonie.State.COLON) {
             throw new Exception("Ligne "+ numeroLigne+" hors ordre attendu " );
         }
@@ -180,7 +183,8 @@ public class ColonieSetup {
      * @return
      * @throws Exception
      */
-    public static int verifRessource(String[] split,int numeroLigne,int nbRessource,Colonie.State actualState,List<String> nomRessources) throws Exception {
+    public static int verifRessource(String[] split,int numeroLigne,int nbRessource,
+                                     Colonie.State actualState,List<String> nomRessources) throws Exception {
     
         if (actualState != Colonie.State.RESSOURCE) {
         	 throw new Exception("Ligne "+ numeroLigne+" hors ordre attendu " );
@@ -205,7 +209,8 @@ public class ColonieSetup {
      * @param nomRessources
      * @throws Exception
      */
-    public static void verifDeteste(String[] split,int numeroLigne,int nbRessource,int nbColon,Colonie.State actualState,List<String> nomColon,List<String> nomRessources) throws Exception {
+    public static void verifDeteste(String[] split,int numeroLigne,int nbRessource,int nbColon,
+                                    Colonie.State actualState,List<String> nomColon,List<String> nomRessources) throws Exception {
     	if (actualState != Colonie.State.DETESTE) {
        	 throw new Exception("Ligne "+ numeroLigne+" hors ordre attendu " );
        }
@@ -230,7 +235,9 @@ public class ColonieSetup {
      * @return le nombre de preferences enregistrées
      * @throws Exception
      */
-    public static int verifPreferences(String[] split,int numeroLigne,int nbRessource,int nbColon,int nbPreferences,Colonie.State actualState,List<String> nomColon,List<String> nomRessources) throws Exception{
+    public static int verifPreferences(String[] split,int numeroLigne,int nbRessource,int nbColon,
+                                       int nbPreferences,Colonie.State actualState,
+                                       List<String> nomColon,List<String> nomRessources) throws Exception{
     	if (actualState != Colonie.State.PREFERENCES) {
        	 throw new Exception("Ligne "+ numeroLigne +" hors ordre attendu " );
        }
@@ -251,8 +258,6 @@ public class ColonieSetup {
        nbPreferences++;
        return nbPreferences;
     }
-    
-    
-    
+
 }
 

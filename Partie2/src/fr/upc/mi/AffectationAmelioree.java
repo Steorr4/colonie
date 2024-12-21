@@ -45,7 +45,7 @@ public class AffectationAmelioree implements AffectationStrategy{
                 colonie.sauvegarderAffectation(meilleureAffectation);
           
             } 
-            //si aucune amelioration au bout de 100 on remelange la liste
+            //si aucune amelioration au bout de 100 on remélange la liste
             else if(nbIterationsSansAmelioration>150) {
             	System.out.println("shuffle");
             	Collections.shuffle(crewmateList);

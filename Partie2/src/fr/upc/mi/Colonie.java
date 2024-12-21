@@ -26,7 +26,7 @@ public class Colonie  {
     }
     
     /**
-     * methode d'effectation naive qui affecte a chaqu'un des colons de 
+     * Methode d'effectation naive qui affecte a chaqu'un des colons de
      * crewmateList dans l'ordre la ressource qu'il prefere si disponible sinon la prochaine.
      *
      */
@@ -51,9 +51,9 @@ public class Colonie  {
     }
     
      /**
-      * methode d'effectation naive qui affecte a chaqu'un des colons de 
-      * crewmateList dans l'ordre la ressource qu'il prefere si disponible sinon la prochaine.
-      * utile pour la methode algoAffectationOptimisee
+      * Methode d'effectation naive qui affecte à chaqu'un des colons de
+      * crewmateList dans l'ordre la ressource qu'il préfère si disponible sinon la prochaine.
+      * Utile pour la methode algoAffectationOptimisee
       * 
       * @param crewmateList une liste de crewmates
       *
@@ -149,13 +149,12 @@ public class Colonie  {
 
     	
     /**
-     * Algorithme du prof amélioré avec tri de la liste de crewmate 
-     *
+     * Algorithme du prof amélioré avec tri de la liste de crewmate
      */
     public void algoAmeliore() throws Exception {
-    	Collections.sort(crewmateList);//trie la liste selon le "degre" d'ennemies afin de reduire des le depart le nombre de jaloux
+    	Collections.sort(crewmateList);//trie la liste selon le "degre" d'ennemies afin de reduire dès le depart le nombre de jaloux
     	affectationAuto();
-    	 HashMap<String, String> meilleureAffectation = new HashMap<>();
+        HashMap<String, String> meilleureAffectation = new HashMap<>();
     	List<Crewmate> meilleureListe = new ArrayList<>(crewmateList);
     	int meilleurNbJaloux = nbEnvious();
     	sauvegarderAffectation(meilleureAffectation);
@@ -183,9 +182,7 @@ public class Colonie  {
         printAffectations();
         printEnviousCrewmates();
         System.out.println("Meilleure affectation trouvée avec " + meilleurNbJaloux + " jaloux.");
-    	
-    	
-    	
+
     }
     
     /**
@@ -247,7 +244,7 @@ public class Colonie  {
 
 
     /**
-     * genere un nombre random entre 0 et n  exclu.
+     * Genere un nombre random entre 0 et n  exclu.
      * 
      * @param n la borne superieure exclu.
      */
@@ -262,7 +259,7 @@ public class Colonie  {
     }
     
     /**
-     * sauvegarde la solution actuelle 
+     * Sauvegarde la solution actuelle
      * 
      * @param solution une hashmap qui contient le nom du colon et la ressource qu'on lui a affecte dans la solution.
      */
@@ -275,7 +272,7 @@ public class Colonie  {
     
     
     /**
-     * restaure la liste crewmateList avec la solution.
+     * Restaure la liste crewmateList avec la solution.
      * 
      * @param solution une hashmap qui contient le nom du colon et la ressource qu'on lui a affecte dans la solution.
      */
@@ -288,7 +285,7 @@ public class Colonie  {
     }
    
     /**
-     * affiche les affectations des ressources dans la colonie.
+     * Affiche les affectations des ressources dans la colonie.
      */
     public void printAffectations() {
         for (Crewmate c : crewmateList) {
@@ -299,7 +296,7 @@ public class Colonie  {
 
 
     /**
-     * met a jour les etats des colons s'ils sont jaloux ou pas
+     * Met à jour les etats des colons s'ils sont jaloux ou pas
      */
     
     public void setEnviousList(){ 
@@ -322,7 +319,7 @@ public class Colonie  {
     }
     
     /**
-     * affiche les colons jaloux.
+     * Affiche les colons jaloux.
      */
     public void printEnviousCrewmates() {
         for (Crewmate c : crewmateList) {
@@ -386,7 +383,7 @@ public class Colonie  {
      }
      
      /**
-      * enumeration des etats pour la verif de fichier.
+      * Enumeration des etats pour la verif de fichier.
       */
 
      public enum State{
@@ -398,7 +395,7 @@ public class Colonie  {
      
      
      /**
-      * verifie le fichier entré en second argument par l'utilisateur.
+      * Verifie le fichier entré en second argument par l'utilisateur.
       * @param path le chemin du fichier
       * @return true si le fichier de format valide 
       * @throws IOException
@@ -464,9 +461,9 @@ public class Colonie  {
      }
      
      /**
-      * recupere la ressource qui a le meme nom que nom
+      * Recupere la ressource qui a le meme nom que nom
       * @param nom nom de la ressource rechecrhchée 
-      * @param ressourceListla ressource si presente sinon null
+      * @param ressourceList la ressource si presente sinon null
       * @return la ressource si presente sinon null
       */
      public static Ressource getRessource(String nom, List<Ressource> ressourceList){
@@ -479,10 +476,10 @@ public class Colonie  {
      
      
      /**
-      * recupere le colon qui a le meme nom que nom
+      * Recupere le colon qui a le meme nom que nom
       * @param nom nom du colon rechecrhche. 
       * @param crewmateList la ressource si presente sinon null
-      * @returnla colon si presente sinon null
+      * @return la colon si presente sinon null
       */
      public static Crewmate getCrewmate(String nom, List<Crewmate> crewmateList){
          for(Crewmate c:crewmateList){
@@ -508,9 +505,9 @@ public class Colonie  {
         int choix;
         boolean exit = false;
         StringTokenizer st;
-        String line = null;
-        String colon1_name = null;
-        String colon2_name = null;
+        String line;
+        String colon1_name;
+        String colon2_name;
         Crewmate c1 = null;
         Crewmate c2 = null;
 
