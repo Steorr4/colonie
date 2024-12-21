@@ -1,9 +1,6 @@
 package fr.upc.mi;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -266,7 +263,7 @@ public class Colonie  {
     public void sauvegarderAffectation(HashMap<String,String> solution) {
     	solution.clear();
         for (Crewmate c : crewmateList) {
-            solution.put(c.getName(), c.getrAssigned().getRessource());
+            solution.put(c.getName(), c.getrAssigned().getName());
         }
     }
     
@@ -290,7 +287,7 @@ public class Colonie  {
     public void printAffectations() {
         for (Crewmate c : crewmateList) {
             System.out.println(c.getName() + " -> " +
-                    (c.getrAssigned() != null ? c.getrAssigned().getRessource() : "Aucune ressource"));
+                    (c.getrAssigned() != null ? c.getrAssigned().getName() : "Aucune ressource"));
         }
     }
 
@@ -443,21 +440,17 @@ public class Colonie  {
       * @throws IOException
       * @throws Exception
       */
-     public void setRAsigned(String path) throws IOException, Exception {
+     public void save(BufferedWriter bw) {
     	 try {
-  			BufferedReader br = new BufferedReader(new FileReader(path));
-  			String ligne;
-  			if(verifSauvegarde(path)) {
-  				while((ligne=br.readLine())!=null) {
-  					Colonie.getCrewmate(ligne.split(":")[0],crewmateList).setrAssigned((Colonie.getRessource(ligne.split(":")[1],ressourceList)));
-  				}
-  				setEnviousList();
-  			}
-  			
-  		} catch (Exception e) {
+
+  			 for(Crewmate c : crewmateList){
+                   bw.write(c.getName()+":"+c.getrAssigned().getName());
+                   bw.newLine();
+             }
+
+  		} catch (IOException e) {
   			System.err.println(e.getMessage());
   		}
-    	 
      }
      
      /**
@@ -468,7 +461,7 @@ public class Colonie  {
       */
      public static Ressource getRessource(String nom, List<Ressource> ressourceList){
          for(Ressource r:ressourceList){
-             if(r.getRessource().equals(nom)) return r;
+             if(r.getName().equals(nom)) return r;
          }
      return null;
      }

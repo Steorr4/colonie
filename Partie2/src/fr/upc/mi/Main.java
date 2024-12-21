@@ -1,5 +1,9 @@
 package fr.upc.mi;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -9,6 +13,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = null;
+        BufferedWriter bw = null;
         long startTime = System.currentTimeMillis();
         try {
             // Vérifier si un fichier est fourni en argument
@@ -70,15 +75,15 @@ public class Main {
                             // Afficher la durée d'exécution
                             System.out.println("Durée d'exécution : " + duration + " millisecondes");
                             break;
+
                         case 2:
-                            if (args.length < 2) {
-                                System.err.println("Erreur : Aucun fichier de sauvegarde spécifié dans les arguments (args[1]).");
-                            } else {
-                                colonie.setRAsigned(args[1]);
-                                System.out.println("Solution sauvegardée dans le fichier : " + args[1]);
-                                System.out.println("Nombre de jaloux : " + colonie.nbEnvious());
-                            }
+                            System.out.println("Entrez le nom du fichier de sauvegarde souaité : ");
+                            String path = sc.nextLine();
+                            bw = new BufferedWriter(new FileWriter(new File(path)));
+                            colonie.save(bw);
+                            System.out.println("Solution sauvegardée dans le fichier : " + path);
                             break;
+
                         case 0:
                             System.out.println("Programme terminé. À bientôt !");
                             exit = true;
@@ -94,8 +99,16 @@ public class Main {
             if (sc != null) {
                 sc.close();
             }
+            if (bw != null){
+                try{
+                    bw.close();
+                } catch (IOException e) {
+                    System.err.println("Erreur lors de la fermeture du BufferedWriter : " + e.getMessage());
+                }
+            }
         }
     }
+
 
     /**
      * Afficher le menu des options

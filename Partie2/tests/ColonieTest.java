@@ -134,6 +134,6 @@ class ColonieTest {
         assertEquals("Alice", c.getName());
 
         assertNotNull(r);
-        assertEquals("Eau", r.getRessource());
+        assertEquals("Eau", r.getName());
     }
 }

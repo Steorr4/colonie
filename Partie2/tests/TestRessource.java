@@ -4,12 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import fr.upc.mi.Ressource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
 
-	import org.junit.jupiter.api.BeforeEach;
-	import org.junit.jupiter.api.Test;
-
-	class RessourceTest {
+class RessourceTest {
 
 	    private Ressource ressource;
 
@@ -22,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 	    @Test
 	    void testConstructor() {
 	        assertNotNull(ressource);
-	        assertEquals("toto", ressource.getRessource());
+	        assertEquals("toto", ressource.getName());
 	        assertTrue(ressource.isAvailable());
 	    }
 

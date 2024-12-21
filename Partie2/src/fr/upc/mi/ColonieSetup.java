@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.StringTokenizer;
 
 public class ColonieSetup {
    
@@ -46,7 +45,7 @@ public class ColonieSetup {
                             Crewmate c = Colonie.getCrewmate(l[1], crewmateList);
                             for (int i = 2; i < ressourceList.size()+2; i++) {
                             	for(Ressource r: ressourceList) {
-                            		if(r.getRessource().equals(l[i])) {
+                            		if(r.getName().equals(l[i])) {
                             			c.getPreferences().add(r);
                             		}
                             	}
