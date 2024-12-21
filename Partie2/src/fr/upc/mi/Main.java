@@ -32,6 +32,8 @@ public class Main {
             if (verif) {
                 ColonieSetup colonieSetup = new ColonieSetup();
                 Colonie colonie = colonieSetup.setUp(filePath);
+                colonie.setAffectationStrategy(new AffectationLineaire());
+                colonie.appliquerAffectation();
 
                 boolean exit = false;
                 int choix;

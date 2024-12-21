@@ -91,7 +91,7 @@ public class Colonie  {
 
     // Méthode pour appliquer la stratégie d'affectation
     public void appliquerAffectation() throws Exception {
-        this.affectationStrategy.affecterRessources(this);
+        affectationStrategy.affecterRessources(this);
     }
     
     /**
@@ -390,50 +390,6 @@ public class Colonie  {
          PREFERENCES;
      }
      
-     
-     /**
-      * Verifie le fichier entré en second argument par l'utilisateur.
-      * @param path le chemin du fichier
-      * @return true si le fichier de format valide 
-      * @throws IOException
-      * @throws Exception
-      */
-     
-     private boolean verifSauvegarde(String path)throws IOException, Exception{
-    	 boolean verif=false;
-    	 try {
- 			BufferedReader br = new BufferedReader(new FileReader(path));
- 			String ligne;
- 			int numeroLigne=0;
- 			while((ligne=br.readLine())!=null) {
- 				numeroLigne++;
- 				if(ligne.split(":").length!=2) {
- 					throw new Exception("le format de la ligne "+numeroLigne+" est invalide");
- 				}
- 			
- 				if(Colonie.getCrewmate(ligne.split(":")[0],crewmateList)==null) {
- 					throw new Exception("l'individu de la ligne "+numeroLigne+" ne fait pas partie de la colonie");
- 				}
- 				if(Colonie.getRessource(ligne.split(":")[1],ressourceList)==null) {
- 					throw new Exception("la ressource de la ligne "+numeroLigne+" ne fait pas partie des ressources de la colonie");
- 				}	
- 			}
- 			if(numeroLigne!=crewmateList.size()) {
- 				throw new Exception("Il manque les affectations de "+(crewmateList.size()-numeroLigne)+ "colons");
- 			}
- 			verif=true;
- 			
- 			
- 			
- 		} catch (FileNotFoundException e) {
- 			
- 			System.err.println("Fichier introuvable "+e.getMessage());
- 		}
-		return verif;
-    	 
-     }
-     
-     
      /**
       * Affectation des ressources selon le fichier sauvegarde de l'utilisateur
       * @param path le chemin du fichier de sauvegarde
@@ -466,8 +422,7 @@ public class Colonie  {
      return null;
      }
      
-     
-     
+
      /**
       * Recupere le colon qui a le meme nom que nom
       * @param nom nom du colon rechecrhche. 
