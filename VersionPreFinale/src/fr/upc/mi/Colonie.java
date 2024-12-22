@@ -264,7 +264,14 @@ public class Colonie  {
      return null;
      }
      
-     
+     /**
+      * 
+      * @return la strategie d'affectation de la colonie
+      */
+     public	AffectationStrategy getAffectationStrategy() {
+ 		return affectationStrategy;
+ 	}
+
      
      //////MENU PARTIE 1
     /**
@@ -331,6 +338,7 @@ public class Colonie  {
          System.out.println("********************");
     }
 
+	
 
 	
 }
