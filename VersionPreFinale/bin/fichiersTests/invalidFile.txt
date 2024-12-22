@@ -1,7 +1,0 @@
-colon(nina).
-colon(nicholas).
-ressource(food).
-ressource(ukulele).
-preferences(nina,ukulele,food).
-deteste(nina, nicholas).
-preferences(nicholas,food,ukulele).
