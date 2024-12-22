@@ -38,50 +38,64 @@ public class ColonieSetup {
         Crewmate c2 = null;
 
         while (!fin) {
-            do {
-                System.out.println("********************");
-                System.out.println("Que souhaitez vous faire ?");
-                System.out.println("1. Ajouter une relation entre 2 colons.");
-                System.out.println("2. Ajouter les preferences d'un colon.");
-                System.out.println("0. Quitter ce menu.");
-                System.out.println("********************");
-                choix = sc.nextInt();
-                sc.nextLine();
-            } while (choix < 0 || choix > 2);
+            try {
+                do {
+                    System.out.println("********************");
+                    System.out.println("Que souhaitez vous faire ?");
+                    System.out.println("1. Ajouter une relation entre 2 colons.");
+                    System.out.println("2. Ajouter les preferences d'un colon.");
+                    System.out.println("0. Quitter ce menu.");
+                    System.out.println("********************");
+                    choix = sc.nextInt();
+                    sc.nextLine();
+                } while (choix < 0 || choix > 2);
 
-            switch (choix) {
-                case 1:
-                    System.out.println("Entrez les deux colons qui ne s'apprecient pas. (ex: 'A B')");
-                    line = sc.nextLine();
-                    st = new StringTokenizer(line, " ");
-                    if (st.countTokens() != 2) throw new IndexOutOfBoundsException("!= 2");
-                    colon1_name = st.nextToken();
-                    colon2_name = st.nextToken();
-                    for (Crewmate colon : c.getCrewmateList()) {
-                        if (colon.getName().equals(colon1_name)) c1 = colon;
-                        if (colon.getName().equals(colon2_name)) c2 = colon;
-                    }
-                    if (c1 == null || c2 == null) throw new Exception("Colon Innexistant");
-                    setRelation(c1, c2);
-                    break;
+                try {
+                    switch (choix) {
+                        case 1:
+                            System.out.println("Entrez les deux colons qui ne s'apprecient pas. (ex: 'A B')");
+                            line = sc.nextLine();
+                            st = new StringTokenizer(line, " ");
+                            if (st.countTokens() != 2) throw new IndexOutOfBoundsException("!= 2");
+                            colon1_name = st.nextToken();
+                            colon2_name = st.nextToken();
+                            for (Crewmate colon : c.getCrewmateList()) {
+                                if (colon.getName().equals(colon1_name)) c1 = colon;
+                                if (colon.getName().equals(colon2_name)) c2 = colon;
+                            }
+                            if (c1 == null || c2 == null) throw new InputMismatchException("Colon Innexistant");
+                            setRelation(c1, c2);
+                            break;
 
-                case 2:
-                    System.out.println("Entrez le nom du colon suivi de l'ordre de ses preferences (ex: A 1 3 2 ... n)");
-                    line = sc.nextLine();
-                    st = new StringTokenizer(line, " ");
-                    colon1_name = st.nextToken();
-                    for (Crewmate colon : c.getCrewmateList()) {
-                        if (colon.getName().equals(colon1_name)) c1 = colon;
-                    }
-                    if (c1 == null) throw new Exception("Colon Innexistant");
-                    c1.getPreferences().clear();
-                    while (st.hasMoreTokens()) {
-                        c1.getPreferences().add(c.getRessourceList().get(Integer.parseInt(st.nextToken()) - 1));
-                    }
-                    break;
+                        case 2:
+                            System.out.println("Entrez le nom du colon suivi de l'ordre de ses preferences (ex: A 1 3 2 ... n)");
+                            line = sc.nextLine();
+                            st = new StringTokenizer(line, " ");
+                            colon1_name = st.nextToken();
+                            for (Crewmate colon : c.getCrewmateList()) {
+                                if (colon.getName().equals(colon1_name)) c1 = colon;
+                            }
+                            if (c1 == null) throw new InputMismatchException("Colon Innexistant");
+                            c1.getPreferences().clear();
+                            while (st.hasMoreTokens()) {
+                                c1.getPreferences().add(c.getRessourceList().get(Integer.parseInt(st.nextToken()) - 1));
+                            }
+                            break;
 
-                default:
-                    fin = true;
+                        default:
+                            for(Crewmate colon : c.getCrewmateList()){
+                                if(colon.getPreferences().isEmpty()) throw new PreferencesNotSetException("Preferences non definie" +
+                                        "pour le colon : "+colon.getName());
+                            }
+                            fin = true;
+                    }
+
+                } catch (InputMismatchException e) {
+                    System.err.println(e.getMessage());
+                }
+            }catch (PreferencesNotSetException e){
+                System.err.println(e.getMessage());
+                fin = false;
             }
         }
     }
@@ -339,6 +353,12 @@ public class ColonieSetup {
        }
        nbPreferences++;
        return nbPreferences;
+    }
+
+    public class PreferencesNotSetException extends Exception{
+        public PreferencesNotSetException(String message) {
+            super(message);
+        }
     }
 
 }
