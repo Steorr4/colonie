@@ -71,6 +71,7 @@ public class ColonieSetup {
                             System.out.println("Entrez le nom du colon suivi de l'ordre de ses preferences (ex: A 1 3 2 ... n)");
                             line = sc.nextLine();
                             st = new StringTokenizer(line, " ");
+                            c1 = null;
                             colon1_name = st.nextToken();
                             for (Crewmate colon : c.getCrewmateList()) {
                                 if (colon.getName().equals(colon1_name)) c1 = colon;
