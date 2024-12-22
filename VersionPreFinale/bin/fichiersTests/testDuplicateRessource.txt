@@ -1,0 +1,6 @@
+colon(nina).
+colon(nicholas).
+ressource(food).
+ressource(ukulele).
+preferences(nina,food,food).
+preferences(nicholas,food,ukulele).

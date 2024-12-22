@@ -1,0 +1,3 @@
+colon(nina).
+ressource(food).
+preferences(nina,ukulele,food).

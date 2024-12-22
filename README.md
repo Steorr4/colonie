@@ -8,6 +8,7 @@ de chacun et de leurs relations entre eux.
 ### Prérequis
 * Une version récente de JAVA
 
+
 ### Installation & lancement
 1. Compiler le programme dans le dossier
 ```sh
@@ -15,6 +16,6 @@ javac -d bin ./fr/upc/mi/colonie/*.java
 ```
 2. Lancer le programme
 ```sh
-java -cp bin fr.upc.mi.colonie.Test
+java -cp bin fr.upc.mi.colonie.Application
 ```
 
