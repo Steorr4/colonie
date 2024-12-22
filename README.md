@@ -27,6 +27,8 @@ Si aucun argument n'est spécifié, le programma vous demandera de créer la col
 
 ```text
 SpaceColony/
+├── doc/
+├── lib/
 ├── src/fr/upc/mi/paa/ 
 |   ├── affectation/
 |   |   ├── AffectationAmelioree.java
