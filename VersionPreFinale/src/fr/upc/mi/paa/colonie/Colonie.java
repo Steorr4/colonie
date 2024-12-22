@@ -12,7 +12,7 @@ import java.util.*;
 public class Colonie  {
     private List<Crewmate> crewmateList; //List car on ne connait pas le nombre de colons intial et la manipulation des List (ajout) est plus simple
     private List<Ressource> ressourceList;
-    private AffectationStrategy affectationStrategy;//utilisation du design patter Strategy
+    private AffectationStrategy affectationStrategy;//utilisation du design pattern Strategy
     /**
      * Constructeur de la colonie.
      *
@@ -71,7 +71,7 @@ public class Colonie  {
 
 
     /**
-     * Genere un nombre random entre 0 et n  exclu.
+     * Genere un nombre random entre ZÉRO et N exclu.
      * 
      * @param n la borne superieure exclu.
      */
@@ -88,7 +88,7 @@ public class Colonie  {
     /**
      * Sauvegarde la solution actuelle
      * 
-     * @param solution une hashmap qui contient le nom du colon et la ressource qu'on lui a affecte dans la solution.
+     * @param solution une hashmap qui contient le nom du colon et la ressource qu'on lui a affecté dans la solution.
      */
     public void sauvegarderAffectation(HashMap<String,String> solution) {
     	solution.clear();
@@ -101,7 +101,7 @@ public class Colonie  {
     /**
      * Restaure la liste crewmateList avec la solution.
      * 
-     * @param solution une hashmap qui contient le nom du colon et la ressource qu'on lui a affecte dans la solution.
+     * @param solution une hashmap qui contient le nom du colon et la ressource qu'on lui a affecté dans la solution.
      */
     public void restaurerAffectation(HashMap<String,String> solution) {
     	for(Crewmate crewmate:crewmateList) {
@@ -217,12 +217,12 @@ public class Colonie  {
          COLON,
          RESSOURCE,
          DETESTE,
-         PREFERENCES;
+         PREFERENCES
      }
      
      /**
       * Affectation des ressources selon le fichier sauvegarde de l'utilisateur
-      * @param path le chemin du fichier de sauvegarde
+      * @param bw
       * @throws IOException
       * @throws Exception
       */
@@ -282,7 +282,7 @@ public class Colonie  {
      * envieux au sein de la colonie.
      *
      * @param sc le scanner permettant de specifier nos choix
-     * @throws Exception si l'on entre le nom d'un colon innexistant ou bien si l'on specifie
+     * @throws Exception si l'on entre le nom d'un colon innexistant ou bien si l'on spécifie
      * plus de 2 colons pour un simple echange
      */
     public void menu(Scanner sc) throws Exception{
@@ -329,7 +329,7 @@ public class Colonie  {
         }
     }
     /**
-     * methode d'affichage du menu de la partie 1
+     * Methode d'affichage du menu de la partie 1
      */
     private void menuPartie1() {
     	 System.out.println("********************");

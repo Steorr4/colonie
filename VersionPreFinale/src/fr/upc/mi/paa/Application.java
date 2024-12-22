@@ -35,7 +35,7 @@ public class Application {
             if (verif) {
                 ColonieSetup colonieSetup = new ColonieSetup();
                 Colonie colonie = colonieSetup.setUp(filePath);
-                colonie.setAffectationStrategy(new AffectationLineaire());// au cas ou l'utilisateur presse pas sur 1 on affecte lineairement
+                colonie.setAffectationStrategy(new AffectationLineaire());// au cas où l'utilisateur ne presse pas sur 1 on affecte lineairement
                 colonie.appliquerAffectation();
 
                 boolean exit = false;
@@ -116,7 +116,9 @@ public class Application {
                         case 2:
                             System.out.println("Entrez le nom du fichier de sauvegarde souaité : ");
                             String path = sc.nextLine();
-                            bw = new BufferedWriter(new FileWriter(new File(path)));
+                            File file = new File(path);
+                            file.getParentFile().mkdirs();
+                            bw = new BufferedWriter(new FileWriter(file));
                             colonie.save(bw);
                             System.out.println("Solution sauvegardée dans le fichier : " + path);
                             break;

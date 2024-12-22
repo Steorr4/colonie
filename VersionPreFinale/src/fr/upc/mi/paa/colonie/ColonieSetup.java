@@ -12,7 +12,7 @@ import java.util.List;
 public class ColonieSetup {
    
 	/**
-	 * Initialise la colonie selon la configuration du fichier de l'utilisateur si aucune erreur de survient 
+	 * Initialise la colonie selon la configuration du fichier de l'utilisateur si aucune erreur ne survient.
 	 * @param path
 	 * @return la colonie correspondante a la configuration du fichier de l'utilisateur 
 	 * @throws Exception
@@ -68,7 +68,7 @@ public class ColonieSetup {
 
 
     /**
-     * verifie si le format du fichier de l'utilisateur est valide
+     * Verifie si le format du fichier de l'utilisateur est valide
      * @param path le chemin du fichier de l'utilisateur
      * @return true si fichier valide false sinon
      */
@@ -150,7 +150,7 @@ public class ColonieSetup {
         return false;
     }
     /**
-     * methode verifiant les lignes de colon
+     * Methode verifiant les lignes de colon
      * @param split
      * @param numeroLigne
      * @param nbColon
@@ -175,7 +175,7 @@ public class ColonieSetup {
     	
     }
     /**
-     * methode verifiant les lignes de ressource
+     * Methode verifiant les lignes de ressource
      * @param split
      * @param numeroLigne
      * @param nbRessource
@@ -200,7 +200,7 @@ public class ColonieSetup {
     }
     
     /**
-     * methode verifiant les lignes de relation deteste
+     * Methode verifiant les lignes de relation deteste
      * @param split
      * @param numeroLigne
      * @param nbRessource
@@ -224,7 +224,7 @@ public class ColonieSetup {
     }
     
     /**
-     * methode verifiant les lignes de preferences
+     * Methode verifiant les lignes de preferences
      * @param split la ligne lue separée 
      * @param numeroLigne
      * @param nbRessource

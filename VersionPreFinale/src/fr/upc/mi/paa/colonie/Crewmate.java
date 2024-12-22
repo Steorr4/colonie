@@ -68,7 +68,7 @@ public class Crewmate implements Comparable<Crewmate>{
     }
 
     /**
-     * Associe une ressource a ce colon.
+     * Associe une ressource à ce colon.
      *
      * @param rAssigned une ressource
      */

@@ -13,7 +13,7 @@ public class AffectationAmelioree implements AffectationStrategy {
 	 * Methode qui implemente un algorithme "ameliore" de l'algorithme naif, celui-ci commence par trier la liste des colons
 	 * selon leurs degres d'ennemis (le nb d'ennemis par colon) par ordre decroissant afin que les colons les plus problematiques
 	 * soient traites en premiers, puis applique une affectation lineaire, prend au hasard deux colons distincts de la colonie et 
-	 * echange leurs ressources si la solution actuelle est meilleure, elle est sauvegardee sinon retour a la precedente.
+	 * echange leurs ressources si la solution actuelle est meilleure, elle est sauvegardee sinon retour à la precedente.
 	 * Afin de ne pas bloquer dans des minimas locaux ici, on rajoute un critere en plus qui est le nombre d'affectations sans ameliorations
 	 * si ce nombre est depasse la liste est alors melangee aleatoirement et ainsi de suite.
      *
@@ -53,7 +53,7 @@ public class AffectationAmelioree implements AffectationStrategy {
             int nbJalouxCourant = colonie.nbEnvious();
             if (nbJalouxCourant < meilleurNbJaloux) {
                 meilleurNbJaloux = nbJalouxCourant;
-                nbIterationsSansAmelioration = 0;  //remet a 0 le nombre d'iterations sans amelioration
+                nbIterationsSansAmelioration = 0;  //remet à 0 le nombre d'iterations sans amelioration
                 colonie.sauvegarderAffectation(meilleureAffectation);//sauvegardea de la solution
           
             } 
