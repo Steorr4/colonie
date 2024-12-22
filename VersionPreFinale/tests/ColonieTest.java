@@ -1,10 +1,8 @@
-
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import fr.upc.mi.*;
-
+import fr.upc.mi.paa.affectation.*;
+import fr.upc.mi.paa.colonie.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +11,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ColonieTest {
-    private List<Crewmate> crewmates;
+    private List<fr.upc.mi.paa.colonie.Crewmate> crewmates;
     private List<Ressource> ressources;
     private Colonie colonie;
 
@@ -26,11 +24,11 @@ class ColonieTest {
         ressources = Arrays.asList(r1, r2, r3);
 
         // Initialiser les colons
-        Crewmate c1 = new Crewmate("Alice");
+        fr.upc.mi.paa.colonie.Crewmate c1 = new fr.upc.mi.paa.colonie.Crewmate("Alice");
         c1.setPreferences( Arrays.asList(r1, r2, r3));
-        Crewmate c2 = new Crewmate("Bob");
+        fr.upc.mi.paa.colonie.Crewmate c2 = new fr.upc.mi.paa.colonie.Crewmate("Bob");
         c2.setPreferences( Arrays.asList(r2, r1, r3));
-        Crewmate c3 = new Crewmate("Charlie");
+        fr.upc.mi.paa.colonie.Crewmate c3 = new fr.upc.mi.paa.colonie.Crewmate("Charlie");
         c3.setPreferences( Arrays.asList(r3, r2, r1));
         c1.addRelation(c2); // Alice déteste Bob
         c2.addRelation(c3); // Bob déteste Charlie
@@ -48,7 +46,7 @@ class ColonieTest {
 
         // Vérifie qu'aucune ressource n'est assignée deux fois
         List<Ressource> assigned = new ArrayList<>();
-        for (Crewmate c : crewmates) {
+        for (fr.upc.mi.paa.colonie.Crewmate c : crewmates) {
             assertNotNull(c.getrAssigned());
             assertFalse(c.getrAssigned().isAvailable());
             assigned.add(c.getrAssigned());
@@ -69,8 +67,8 @@ class ColonieTest {
 
     @Test
     void testSwapRessources() {
-        Crewmate c1 = crewmates.get(0); // Alice
-        Crewmate c2 = crewmates.get(1); // Bob
+        fr.upc.mi.paa.colonie.Crewmate c1 = crewmates.get(0); // Alice
+        fr.upc.mi.paa.colonie.Crewmate c2 = crewmates.get(1); // Bob
 
         // Assigner des ressources manuellement pour le test
         c1.setrAssigned(ressources.get(0)); // Alice reçoit "Eau"
@@ -88,13 +86,13 @@ class ColonieTest {
     @Test
     void testSetAffectationStrategy() {
         //test pour chaque strategie
-        colonie.setAffectationStrategy(new AffectationAmelioree());
+        colonie.setAffectationStrategy(new fr.upc.mi.paa.affectation.AffectationAmelioree());
         assertNotNull(colonie.getAffectationStrategy());
         
-        colonie.setAffectationStrategy(new AffectationBruteForce());
+        colonie.setAffectationStrategy(new fr.upc.mi.paa.affectation.AffectationBruteForce());
         assertNotNull(colonie.getAffectationStrategy());
         
-        colonie.setAffectationStrategy(new AffectationLineaire());
+        colonie.setAffectationStrategy(new fr.upc.mi.paa.affectation.AffectationLineaire());
         assertNotNull(colonie.getAffectationStrategy());
         
     }
@@ -104,21 +102,21 @@ class ColonieTest {
     void testAppliquerAffectation() throws Exception {
        
         //test pour chaque strategie si chaque colon recoit bien une ressource
-        colonie.setAffectationStrategy(new AffectationAmelioree());
+        colonie.setAffectationStrategy(new fr.upc.mi.paa.affectation.AffectationAmelioree());
         colonie.appliquerAffectation();
-        for(Crewmate c: colonie.getCrewmateList()) {
+        for(fr.upc.mi.paa.colonie.Crewmate c: colonie.getCrewmateList()) {
         	assertTrue(c.getrAssigned()!=null);
         }
         
-        colonie.setAffectationStrategy(new AffectationBruteForce());
+        colonie.setAffectationStrategy(new fr.upc.mi.paa.affectation.AffectationBruteForce());
         colonie.appliquerAffectation();
-        for(Crewmate c: colonie.getCrewmateList()) {
+        for(fr.upc.mi.paa.colonie.Crewmate c: colonie.getCrewmateList()) {
         	assertTrue(c.getrAssigned()!=null);
         }
         
         colonie.setAffectationStrategy(new AffectationLineaire());
         colonie.appliquerAffectation();
-        for(Crewmate c: colonie.getCrewmateList()) {
+        for(fr.upc.mi.paa.colonie.Crewmate c: colonie.getCrewmateList()) {
         	assertTrue(c.getrAssigned()!=null);
         }
         
@@ -132,7 +130,7 @@ class ColonieTest {
         colonie.setEnviousList();
 
         // Vérifie que la liste des jaloux est correctement mise à jour
-        for (Crewmate c : crewmates) {
+        for (fr.upc.mi.paa.colonie.Crewmate c : crewmates) {
             if (c.isEnvious()) {
                 assertNotNull(c.getrAssigned());
             }
@@ -141,7 +139,7 @@ class ColonieTest {
 
     @Test
     void testGetCrewmateAndGetRessource() {
-        Crewmate c = Colonie.getCrewmate("Alice", crewmates);
+        fr.upc.mi.paa.colonie.Crewmate c = Colonie.getCrewmate("Alice", crewmates);
         Ressource r = Colonie.getRessource("Eau", ressources);
 
         assertNotNull(c);

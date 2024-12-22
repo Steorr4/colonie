@@ -1,3 +1,0 @@
-nom_colon_1:nom_ressource_1
-nom_colon_2:nom_ressource_2
-nom_colon_3:nom_ressource_3

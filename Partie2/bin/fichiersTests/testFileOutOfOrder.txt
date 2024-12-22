@@ -1,3 +1,0 @@
-preferences(nina,food).
-colon(nina).
-ressource(food).

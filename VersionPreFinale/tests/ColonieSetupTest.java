@@ -1,10 +1,7 @@
-
-
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import fr.upc.mi.Colonie;
-import fr.upc.mi.ColonieSetup;
+import fr.upc.mi.paa.colonie.*;
 
 public class ColonieSetupTest {
 	// a changer 

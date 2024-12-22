@@ -1,4 +1,0 @@
-colon(nina).
-colon(nicholas).
-deteste(nina,nicholas  
-preferences(nina,food).

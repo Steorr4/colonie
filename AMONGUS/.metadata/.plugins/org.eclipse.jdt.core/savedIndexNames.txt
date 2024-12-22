@@ -1,4 +1,0 @@
-INDEX VERSION 1.134+C:\Users\sioua\OneDrive\Bureau\LICENCE\JAVA\AMONGUS\.metadata\.plugins\org.eclipse.jdt.core
-2994630455.index
-1865797976.index
-2281821088.index

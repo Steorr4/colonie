@@ -1,12 +1,9 @@
-
-
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import fr.upc.mi.Crewmate;
-import fr.upc.mi.Ressource;
+import fr.upc.mi.paa.colonie.*;
 
 import java.util.Arrays;
 
