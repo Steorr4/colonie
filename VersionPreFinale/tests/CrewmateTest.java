@@ -71,7 +71,7 @@ class CrewmateTest {
         crewmate.addRelation(new Crewmate("toto"));
         crewmate.addRelation(new Crewmate("bobo"));
 
-        assertTrue(crewmate.compareTo(crewmate2) < 0);
+        assertTrue(crewmate.compareTo(crewmate2) <0);
     }
 
     @Test

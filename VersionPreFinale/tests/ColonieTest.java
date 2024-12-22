@@ -3,9 +3,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import fr.upc.mi.Colonie;
-import fr.upc.mi.Crewmate;
-import fr.upc.mi.Ressource;
+import fr.upc.mi.*;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -86,6 +85,45 @@ class ColonieTest {
 
 
   
+    @Test
+    void testSetAffectationStrategy() {
+        //test pour chaque strategie
+        colonie.setAffectationStrategy(new AffectationAmelioree());
+        assertNotNull(colonie.getAffectationStrategy());
+        
+        colonie.setAffectationStrategy(new AffectationBruteForce());
+        assertNotNull(colonie.getAffectationStrategy());
+        
+        colonie.setAffectationStrategy(new AffectationLineaire());
+        assertNotNull(colonie.getAffectationStrategy());
+        
+    }
+    
+    
+    @Test
+    void testAppliquerAffectation() throws Exception {
+       
+        //test pour chaque strategie si chaque colon recoit bien une ressource
+        colonie.setAffectationStrategy(new AffectationAmelioree());
+        colonie.appliquerAffectation();
+        for(Crewmate c: colonie.getCrewmateList()) {
+        	assertTrue(c.getrAssigned()!=null);
+        }
+        
+        colonie.setAffectationStrategy(new AffectationBruteForce());
+        colonie.appliquerAffectation();
+        for(Crewmate c: colonie.getCrewmateList()) {
+        	assertTrue(c.getrAssigned()!=null);
+        }
+        
+        colonie.setAffectationStrategy(new AffectationLineaire());
+        colonie.appliquerAffectation();
+        for(Crewmate c: colonie.getCrewmateList()) {
+        	assertTrue(c.getrAssigned()!=null);
+        }
+        
+    }
+
 
 
     @Test
