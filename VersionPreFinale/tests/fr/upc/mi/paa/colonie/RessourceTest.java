@@ -1,9 +1,9 @@
+package fr.upc.mi.paa.colonie;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-
-import fr.upc.mi.paa.colonie.Ressource;
 
 class RessourceTest {
 

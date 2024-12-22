@@ -1,11 +1,11 @@
+package fr.upc.mi.paa.colonie;
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import fr.upc.mi.paa.colonie.*;
-
 public class ColonieSetupTest {
 	// a changer 
-	private String path = "C:\\Users\\sioua\\OneDrive\\Bureau\\LICENCE\\JAVA\\ProjetAmongUs\\ProjetPAA\\tests\\fichiersTests\\";
+	private String path = "./tests/fichiersTests/";
 
 	@Test
     public void testFileSetUp_ValidFile() {

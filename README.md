@@ -44,10 +44,11 @@ SpaceColony/
 |       └── MenuPrincipal.java
 ├── tests/
 |   ├── fichiersTests/
-|   ├── ColonieSetupTest.java
-|   ├── ColonieTest.java
-|   ├── CrewmateTest.java
-|   └── RessourceTest.java
+|   └── fr/upc/mi/paa/colonie/
+|       ├── ColonieSetupTest.java
+|       ├── ColonieTest.java
+|       ├── CrewmateTest.java
+|       └── RessourceTest.java
 ├── LICENSE
 ├── README.md
 └── SpaceColony.jar
