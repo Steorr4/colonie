@@ -9,7 +9,15 @@ import java.util.*;
 
 public class ColonieSetup {
 
-    public Colonie manualSetUp(Scanner sc) throws Exception {
+    /**
+     * Permet à l'utilisateur de creer sa propre colonie à la main directement depuis le terminal si aucun fichier
+     * n'est spécifié dans les arguments de lancement.
+     *
+     * @param sc le scanner
+     *
+     * @return la colonie vennant d'etre construite.
+     */
+    public Colonie manualSetUp(Scanner sc){
 
         int n = 0;
         System.out.println("Combien voulez vous de colons ? (1 - 26)");
@@ -23,11 +31,17 @@ public class ColonieSetup {
         }
 
         Colonie c = new Colonie(crewmates, ressources);
-        manualMenu(c, n, sc);
+        manualMenu(c, sc);
         return c;
     }
 
-    private void manualMenu(Colonie c, int n, Scanner sc) throws Exception {
+    /**
+     * Affiche le menu de creation de colonie à partir de zéro.
+     *
+     * @param c la colonie
+     * @param sc le scanner
+     */
+    private void manualMenu(Colonie c, Scanner sc){
         StringTokenizer st;
         int choix;
         boolean fin = false;
@@ -113,7 +127,6 @@ public class ColonieSetup {
         c1.getRelations().add(c2);
         c2.getRelations().add(c1);
     }
-
 
 	/**
 	 * Initialise la colonie selon la configuration du fichier de l'utilisateur si aucune erreur ne survient.
@@ -364,6 +377,9 @@ public class ColonieSetup {
        return nbPreferences;
     }
 
+    /**
+     * Exception lorsque les preferences d'un colon n'ont pas été définie.
+     */
     public class PreferencesNotSetException extends Exception{
         public PreferencesNotSetException(String message) {
             super(message);

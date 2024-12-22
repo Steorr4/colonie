@@ -45,8 +45,6 @@ public class Ressource  {
      *
      * @return le colon possedant la name s'il y en a un
      */
-
-
     public String getName() { return name;}
 
 

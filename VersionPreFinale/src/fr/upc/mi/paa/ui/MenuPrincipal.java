@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Classe permettant d'effectuer certaines interactions avec l'utilisateur.
+ */
 public class MenuPrincipal {
 
     private Scanner sc;
@@ -22,6 +25,10 @@ public class MenuPrincipal {
         this.colonie = colonie;
     }
 
+    /**
+     * Methode pour afficher le menu principal et interagir avec l'utilisateur pour qu'il applique les differents algos de
+     * repartition à sa colonie ou bien enregistrer ses resultats.
+     */
     public void getMenu(){
         long startTime = System.currentTimeMillis();
         boolean exit = false;
@@ -137,7 +144,7 @@ public class MenuPrincipal {
     }
 
     /**
-     * Afficher le menu des options
+     * Afficher le menu des options.
      */
     private static void afficherMenu() {
         System.out.println("********************");
@@ -148,6 +155,9 @@ public class MenuPrincipal {
         System.out.println("********************");
     }
 
+    /**
+     * Afficher le menu des choix d'algo.
+     */
     private static void afficherMenuChoixAlgorithme() {
     	System.out.println("********************");
         System.out.println("Que souhaitez-vous faire ?");
