@@ -75,17 +75,25 @@ public class ColonieSetup {
                             for (Crewmate colon : c.getCrewmateList()) {
                                 if (colon.getName().equals(colon1_name)) c1 = colon;
                             }
-                            if (c1 == null) throw new InputMismatchException("Colon Innexistant");
-                            c1.getPreferences().clear();
-                            while (st.hasMoreTokens()) {
-                                c1.getPreferences().add(c.getRessourceList().get(Integer.parseInt(st.nextToken()) - 1));
+                            if (c1 == null) {
+                                throw new InputMismatchException("Colon Innexistant");
+                            }else{
+                                c1.getPreferences().clear();
+                                while (st.hasMoreTokens()) {
+                                    String pref = st.nextToken();
+                                    if(Integer.parseInt(pref) > c.getRessourceList().size()) {
+                                        throw new InputMismatchException("Ressource innexistante.");
+                                    }else {
+                                        c1.getPreferences().add(c.getRessourceList().get(Integer.parseInt(pref) - 1));
+                                    }
+                                }
                             }
                             break;
 
                         default:
                             for(Crewmate colon : c.getCrewmateList()){
                                 if(colon.getPreferences().isEmpty()) throw new PreferencesNotSetException("Preferences non definie" +
-                                        "pour le colon : "+colon.getName());
+                                        " pour le colon : "+colon.getName());
                             }
                             fin = true;
                     }
